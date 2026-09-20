@@ -1,0 +1,75 @@
+name: Update research tracker
+
+on:
+  schedule:
+    - cron: "7 0 * * *"   # 00:07 UTC = 08:07 Hong Kong, every day
+  workflow_dispatch:       # "Run workflow" button for manual runs
+    inputs:
+      baseline:
+        description: "Rebuild from scratch (last 5 years of papers)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write          # save docs/data/feed.json back to the repo
+  pages: write             # publish the website
+  id-token: write
+
+concurrency:
+  group: tracker
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Self-test
+        run: python test_tracker.py
+
+      - name: Fetch PubMed and ClinicalTrials.gov
+        id: track
+        continue-on-error: true   # still publish; the site shows which source failed
+        env:
+          NCBI_EMAIL: ${{ secrets.NCBI_EMAIL }}
+        run: |
+          if [ "${{ inputs.baseline }}" = "true" ]; then
+            python tracker.py --baseline
+          else
+            python tracker.py
+          fi
+
+      - name: Save data
+        run: |
+          [ -f docs/data/feed.json ] || exit 0
+          git config user.name  "research-tracker"
+          git config user.email "research-tracker@users.noreply.github.com"
+          git add docs/data/feed.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Update research data $(date -u +%F)"
+          git push
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Publish website
+        id: deploy
+        uses: actions/deploy-pages@v4
+
+      - name: Flag a failed source (GitHub emails the owner)
+        if: steps.track.outcome == 'failure'
+        run: |
+          echo "::error::A data source failed. The site shows the last good data and a warning."
+          exit 1
