@@ -242,7 +242,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
 <section id="papers">
 <div class="wrap">
   <h2><span lang="en">Latest research</span><span lang="zh-CN">最新文献</span></h2>
-  <p class="sub"><span lang="en">Papers from PubMed on CCS, GNET and EWSR1::ATF1 / EWSR1::CREB1 (childhood "clear cell sarcoma of the kidney", a different disease, is excluded). Titles are shown exactly as published.</span><span lang="zh-CN">来自 PubMed 的透明细胞肉瘤、GNET 及 EWSR1::ATF1 / EWSR1::CREB1 相关论文（已排除另一种疾病"儿童肾透明细胞肉瘤"）。论文标题保留英文原文。</span></p>
+  <p class="sub"><span lang="en">Papers from PubMed on CCS, GNET and EWSR1::ATF1 / EWSR1::CREB1 (childhood "clear cell sarcoma of the kidney", a different disease, is excluded). "Main topic" shows papers whose title is about the disease; "All" also includes papers that only mention it. Titles are shown exactly as published.</span><span lang="zh-CN">来自 PubMed 的透明细胞肉瘤、GNET 及 EWSR1::ATF1 / EWSR1::CREB1 相关论文（已排除另一种疾病"儿童肾透明细胞肉瘤"）。"主题相关"只显示标题以本病为主题的论文，"全部"还包括仅在摘要中提及本病的论文。论文标题保留英文原文。</span></p>
   <div class="tools">
     <div class="chips" id="paperChips"></div>
     <input type="search" id="paperSearch" aria-label="Search papers">
@@ -341,7 +341,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
       RECRUITING:"Recruiting", NOT_YET_RECRUITING:"Not yet recruiting", phase:"Phase", china:"Site in China", isNew:"New",
       posted:"First posted", sponsor:"Sponsor", sites:"Sites", noSites:"sites not listed", closedOn:"noticed",
       all:"All", trialRep:"Trial reports", recent:"New (30 days)", search:"Search titles…", more:"Show more",
-      noPapers:"No papers match.", added:"added"
+      noPapers:"No papers match.", added:"added", focus:"Main topic", focusTrial:"CCS / GNET specific"
     },
     zh: {
       updated:"最近更新", openCcs:"个 CCS / GNET 试验招募中", papers:"篇论文已收录", newPapers:"篇近 30 天新增论文",
@@ -352,11 +352,11 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
       RECRUITING:"招募中", NOT_YET_RECRUITING:"尚未招募", phase:"期", china:"中国有研究中心", isNew:"新",
       posted:"首次登记", sponsor:"申办方", sites:"研究中心", noSites:"未列出中心", closedOn:"发现于",
       all:"全部", trialRep:"临床试验报告", recent:"近 30 天新增", search:"搜索标题…", more:"显示更多",
-      noPapers:"没有符合条件的论文。", added:"收录于"
+      noPapers:"没有符合条件的论文。", added:"收录于", focus:"主题相关", focusTrial:"专项 CCS / GNET 试验"
     }
   };
   var COUNTRY_ZH = {"China":"中国","United States":"美国","Japan":"日本","Korea, Republic of":"韩国","Spain":"西班牙","Italy":"意大利","France":"法国","Germany":"德国","United Kingdom":"英国","Canada":"加拿大","Australia":"澳大利亚","Taiwan":"中国台湾","Hong Kong":"中国香港","Netherlands":"荷兰","Belgium":"比利时","Switzerland":"瑞士","Singapore":"新加坡","India":"印度","Israel":"以色列","Poland":"波兰","Denmark":"丹麦","Sweden":"瑞典","Norway":"挪威","Austria":"奥地利"};
-  var lang = "en", feed = null, trialTab = "ccs", paperFilter = "all", paperQuery = "", paperShown = 25;
+  var lang = "en", feed = null, trialTab = "ccs", paperFilter = "focus", paperQuery = "", paperShown = 25;
 
   function t(k){ return (T[lang] && T[lang][k]) || T.en[k] || k; }
   function el(tag, attrs){
@@ -427,6 +427,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
   function trialCard(id, x){
     var kick = el("div", {cls:"ev kicker", style:"margin:0"});
     kick.appendChild(el("span", {cls:"pill " + (x.open ? "green" : ""), text: x.open ? t(x.status) : t("closed")}));
+    if (x.focus) kick.appendChild(el("span", {cls:"pill blue", text:t("focusTrial")}));
     if (x.phases && x.phases.length) kick.appendChild(el("span", {cls:"pill", text:phaseText(x.phases)}));
     if (x.china) kick.appendChild(el("span", {cls:"pill red", text:"🇨🇳 " + t("china")}));
     if (isNew(x)) kick.appendChild(el("span", {cls:"pill amber", text:t("isNew")}));
@@ -455,7 +456,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
     var ids = Object.keys(all).filter(function(k){ return all[k].open && all[k].group === trialTab; });
     ids.sort(function(a, b){
       var A = all[a], B = all[b];
-      return (B.china - A.china) || String(B.first_posted).localeCompare(String(A.first_posted));
+      return (!!B.focus - !!A.focus) || (B.china - A.china) || String(B.first_posted).localeCompare(String(A.first_posted));
     });
     if (!ids.length) list.appendChild(el("div", {cls:"empty", text:t("noTrials")}));
     ids.forEach(function(k){ list.appendChild(trialCard(k, all[k])); });
@@ -472,7 +473,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
   function renderPapers(){
     var chips = document.getElementById("paperChips"), list = document.getElementById("paperList"), more = document.getElementById("paperMore");
     clear(chips); clear(list);
-    [["all","all"],["trial","trialRep"],["new","recent"]].forEach(function(c){
+    [["focus","focus"],["all","all"],["trial","trialRep"],["new","recent"]].forEach(function(c){
       var b = el("button", {type:"button", "aria-pressed": String(paperFilter === c[0]), text:t(c[1])});
       b.addEventListener("click", function(){ paperFilter = c[0]; paperShown = 25; renderPapers(); });
       chips.appendChild(b);
@@ -481,6 +482,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
     var all = feed.papers || {}, q = paperQuery.trim().toLowerCase();
     var ids = Object.keys(all).filter(function(k){
       var p = all[k];
+      if (paperFilter === "focus" && !p.focus) return false;
       if (paperFilter === "trial" && !p.is_trial) return false;
       if (paperFilter === "new" && !isNew(p)) return false;
       if (q && (p.title + " " + p.journal).toLowerCase().indexOf(q) < 0) return false;

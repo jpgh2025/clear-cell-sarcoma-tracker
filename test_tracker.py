@@ -25,7 +25,8 @@ def fake_fetch(url, params):
     if "esummary" in url:
         res = {}
         for pid in params["id"].split(","):
-            res[pid] = {"title": f"Paper {pid}", "fulljournalname": "J",
+            title = {"555": "Treatment of childhood kidney tumors", "777": "Clear cell sarcoma: a review"}.get(pid, f"Paper {pid}")
+            res[pid] = {"title": title, "fulljournalname": "J",
                         "pubtype": ["Clinical Trial, Phase II"] if pid == "333" else ["Journal Article"],
                         "sortpubdate": "2026/09/19 00:00",
                         "articleids": [{"idtype": "doi", "value": f"10.1/{pid}"}]}
@@ -35,6 +36,8 @@ def fake_fetch(url, params):
         if cond == "clear cell sarcoma":
             out = [study(n, "CCS trial", ["Clear Cell Sarcoma"], ["China"]) for n in WORLD["trials"]]
             out.append(study("NCT0KID", "Renal tumours", ["Wilms Tumor", "Clear Cell Sarcoma of the Kidney"], ["United States"]))
+            out.append(study("NCT0NET", "Neuroendocrine registry", ["Neuroendocrine Tumors"], ["China"]))
+            out.append(study("NCT0MIX", "Agnostic therapy in rare solid tumors", ["Solid Tumor", "Clear Cell Sarcoma"], []))
             return {"studies": out}
         if cond == "EWSR1":
             dup = [study("NCT0001", "dup", ["Sarcoma"], [])] if "NCT0001" in WORLD["trials"] else []
@@ -101,6 +104,18 @@ def test_failure_keeps_data_and_is_recorded():
     assert "timeout" in f["sources"]["pubmed"]["error"]
     assert set(f["papers"]) == {"111", "222"}, "old papers must be kept"
     assert f["sources"]["ctgov"]["ok"] is True
+
+
+def test_relevance_filters_and_focus_flags():
+    setup()
+    WORLD["pmids"] = ["111", "555", "777"]
+    tracker.run(baseline=True, now=day(20))
+    f = feed()
+    assert "NCT0NET" not in f["trials"], "loosely matched trial must be dropped"
+    assert f["trials"]["NCT0MIX"]["group"] == "ccs" and not f["trials"]["NCT0MIX"]["focus"]
+    assert f["trials"]["NCT0001"]["focus"] is True  # "CCS" in the title counts as main topic
+    assert "555" not in f["papers"], "kidney-tumour paper must be dropped"
+    assert f["papers"]["777"]["focus"] and not f["papers"]["111"]["focus"]
 
 
 def test_site_data_path_is_inside_docs():

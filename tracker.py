@@ -99,6 +99,8 @@ def pubmed_items(lookback_days):
             doc = res["result"].get(pid)
             if not doc or "error" in doc or not doc.get("title"):
                 continue  # no verifiable record -> drop, never fill in
+            if _is_kidney_only(doc["title"]):
+                continue  # childhood kidney tumours are a different disease
             pubtypes = doc.get("pubtype", [])
             doi = next((a.get("value") for a in doc.get("articleids", [])
                         if a.get("idtype") == "doi"), "")
@@ -107,6 +109,7 @@ def pubmed_items(lookback_days):
                 "journal": doc.get("fulljournalname", ""),
                 "pubtypes": pubtypes,
                 "is_trial": any(t in p.lower() for p in pubtypes for t in TRIAL_PUBTYPES),
+                "focus": bool(FOCUS_RE.search(doc["title"])),
                 "pubdate": doc.get("sortpubdate", "")[:10].replace("/", "-"),
                 "doi": doi,
                 "url": f"https://pubmed.ncbi.nlm.nih.gov/{pid}/",
@@ -115,8 +118,16 @@ def pubmed_items(lookback_days):
 
 
 # ---- ClinicalTrials.gov ----------------------------------------------------
+# Must appear in a trial's title/conditions/keywords to count as CCS / GNET.
+CORE_RE = re.compile(r"clear[\s-]*cell[\s-]*sarcoma|ewsr1|gastrointestinal neuroectodermal tumou?r|\bgnet\b|ccslgt|"
+                     r"melanoma of soft parts", re.I)
+# In a title, marks a paper or trial whose main topic is this disease.
+FOCUS_RE = re.compile(r"clear[\s-]*cell[\s-]*sarcoma|\bccs\b|gastrointestinal neuroectodermal tumou?r|\bgnet\b|ccslgt|"
+                      r"ewsr1[\s:-]*(atf1|creb1)", re.I)
+
+
 def _is_kidney_only(text):
-    return (re.search(r"kidney|renal", text, re.I)
+    return (re.search(r"kidney|renal|wilms", text, re.I)
             and not re.search(r"soft tissue|tendon|aponeuros|gastrointestinal", text, re.I))
 
 
@@ -141,7 +152,12 @@ def ctgov_items():
                     continue
                 conditions = ps.get("conditionsModule", {}).get("conditions", [])
                 title = ident.get("briefTitle", "").strip()
-                if group == "ccs" and _is_kidney_only(title + " " + " ".join(conditions)):
+                keywords = ps.get("conditionsModule", {}).get("keywords", [])
+                text = " ".join([title] + conditions + keywords)
+                # ClinicalTrials.gov expands searches loosely, so re-check relevance here.
+                if group == "ccs" and (not CORE_RE.search(text) or _is_kidney_only(text)):
+                    continue
+                if group == "sts_china" and not re.search(r"sarcoma", text, re.I):
                     continue
                 status = ps.get("statusModule", {})
                 locs = ps.get("contactsLocationsModule", {}).get("locations", [])
@@ -149,6 +165,7 @@ def ctgov_items():
                 found[nct] = {
                     "group": group,
                     "title": title,
+                    "focus": bool(FOCUS_RE.search(title)),
                     "status": status.get("overallStatus", ""),
                     "phases": ps.get("designModule", {}).get("phases", []),
                     "conditions": conditions[:6],
