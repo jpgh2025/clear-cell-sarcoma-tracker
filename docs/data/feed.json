@@ -4868,12 +4868,12 @@
  "schema": 1,
  "sources": {
   "ctgov": {
-   "checked": "2026-09-20T11:56:47+00:00",
+   "checked": "2026-09-20T12:19:06+00:00",
    "error": "",
    "ok": true
   },
   "pubmed": {
-   "checked": "2026-09-20T11:56:47+00:00",
+   "checked": "2026-09-20T12:19:06+00:00",
    "error": "",
    "ok": true
   }
@@ -7490,5 +7490,5 @@
    "url": "https://clinicaltrials.gov/study/NCT07817095"
   }
  },
- "updated": "2026-09-20T11:56:47+00:00"
+ "updated": "2026-09-20T12:19:06+00:00"
 }
