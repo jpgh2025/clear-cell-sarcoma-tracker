@@ -38,6 +38,7 @@ def fake_fetch(url, params):
             out.append(study("NCT0KID", "Renal tumours", ["Wilms Tumor", "Clear Cell Sarcoma of the Kidney"], ["United States"]))
             out.append(study("NCT0NET", "Neuroendocrine registry", ["Neuroendocrine Tumors"], ["China"]))
             out.append(study("NCT0MIX", "Agnostic therapy in rare solid tumors", ["Solid Tumor", "Clear Cell Sarcoma"], []))
+            out.append(study("NCT0REV", "Devimistat in relapsed soft tissue tumours", ["Sarcoma, Clear Cell"], []))
             return {"studies": out}
         if cond == "EWSR1":
             dup = [study("NCT0001", "dup", ["Sarcoma"], [])] if "NCT0001" in WORLD["trials"] else []
@@ -114,6 +115,7 @@ def test_relevance_filters_and_focus_flags():
     assert "NCT0NET" not in f["trials"], "loosely matched trial must be dropped"
     assert f["trials"]["NCT0MIX"]["group"] == "ccs" and not f["trials"]["NCT0MIX"]["focus"]
     assert f["trials"]["NCT0001"]["focus"] is True  # "CCS" in the title counts as main topic
+    assert "NCT0REV" in f["trials"], "reversed condition name must still match"
     assert "555" not in f["papers"], "kidney-tumour paper must be dropped"
     assert f["papers"]["777"]["focus"] and not f["papers"]["111"]["focus"]
 

@@ -119,10 +119,10 @@ def pubmed_items(lookback_days):
 
 # ---- ClinicalTrials.gov ----------------------------------------------------
 # Must appear in a trial's title/conditions/keywords to count as CCS / GNET.
-CORE_RE = re.compile(r"clear[\s-]*cell[\s-]*sarcoma|ewsr1|gastrointestinal neuroectodermal tumou?r|\bgnet\b|ccslgt|"
+CORE_RE = re.compile(r"clear[\s-]*cell[\s-]*sarcoma|sarcoma,\s*clear[\s-]*cell|ewsr1|gastrointestinal neuroectodermal tumou?r|\bgnet\b|ccslgt|"
                      r"melanoma of soft parts", re.I)
 # In a title, marks a paper or trial whose main topic is this disease.
-FOCUS_RE = re.compile(r"clear[\s-]*cell[\s-]*sarcoma|\bccs\b|gastrointestinal neuroectodermal tumou?r|\bgnet\b|ccslgt|"
+FOCUS_RE = re.compile(r"clear[\s-]*cell[\s-]*sarcoma|sarcoma,\s*clear[\s-]*cell|\bccs\b|gastrointestinal neuroectodermal tumou?r|\bgnet\b|ccslgt|"
                       r"ewsr1[\s:-]*(atf1|creb1)", re.I)
 
 
