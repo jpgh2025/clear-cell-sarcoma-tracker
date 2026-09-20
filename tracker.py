@@ -157,7 +157,9 @@ def ctgov_items():
                 # ClinicalTrials.gov expands searches loosely, so re-check relevance here.
                 if group == "ccs" and (not CORE_RE.search(text) or _is_kidney_only(text)):
                     continue
-                if group == "sts_china" and not re.search(r"sarcoma", text, re.I):
+                # "Kirsten rat sarcoma" (KRAS), myeloid sarcoma and Kaposi-virus trials are not soft-tissue sarcoma.
+                if group == "sts_china" and not re.search(r"sarcoma", re.sub(
+                        r"rat sarcoma|myeloid sarcoma|kaposi'?s? sarcoma[- ]associated", "", text, flags=re.I), re.I):
                     continue
                 status = ps.get("statusModule", {})
                 locs = ps.get("contactsLocationsModule", {}).get("locations", [])

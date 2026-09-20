@@ -43,6 +43,9 @@ def fake_fetch(url, params):
         if cond == "EWSR1":
             dup = [study("NCT0001", "dup", ["Sarcoma"], [])] if "NCT0001" in WORLD["trials"] else []
             return {"studies": dup + [study("NCT0002", "Ewing", ["Ewing Sarcoma"], [])]}
+        if cond == "soft tissue sarcoma":
+            return {"studies": [study("NCT0KRAS", "KRAS G12C lung cancer", ["Kirsten Rat Sarcoma Mutation"], ["China"]),
+                                study("NCT0STS", "Anlotinib in STS", ["Soft Tissue Sarcoma"], ["China"])]}
         return {"studies": []}
     raise AssertionError(url)
 
@@ -116,6 +119,7 @@ def test_relevance_filters_and_focus_flags():
     assert f["trials"]["NCT0MIX"]["group"] == "ccs" and not f["trials"]["NCT0MIX"]["focus"]
     assert f["trials"]["NCT0001"]["focus"] is True  # "CCS" in the title counts as main topic
     assert "NCT0REV" in f["trials"], "reversed condition name must still match"
+    assert "NCT0KRAS" not in f["trials"] and f["trials"]["NCT0STS"]["group"] == "sts_china"
     assert "555" not in f["papers"], "kidney-tumour paper must be dropped"
     assert f["papers"]["777"]["focus"] and not f["papers"]["111"]["focus"]
 

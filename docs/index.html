@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" data-lang="en">
+<html lang="zh-CN" data-lang="zh">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CCS &amp; GNET Research Tracker · 透明细胞肉瘤研究追踪</title>
+<title>透明细胞肉瘤研究追踪 · CCS &amp; GNET Research Tracker</title>
 <meta name="description" content="A bilingual, automatically updated tracker of research and open clinical trials for clear cell sarcoma (CCS) and gastrointestinal neuroectodermal tumour (GNET). 透明细胞肉瘤与胃肠道神经外胚层肿瘤的中英文研究与临床试验追踪。">
 <meta name="keywords" content="clear cell sarcoma, CCS, GNET, gastrointestinal neuroectodermal tumour, EWSR1-ATF1, EWSR1::ATF1, sarcoma clinical trials, 透明细胞肉瘤, 胃肠道神经外胚层肿瘤, 软组织肉瘤, 临床试验, EWSR1融合">
 <link rel="canonical" href="https://jpgh2025.github.io/clear-cell-sarcoma-tracker/">
@@ -130,6 +130,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
 .res a.big{font-weight:600}
 .share{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .share img{width:96px;height:96px;border-radius:8px;background:#fff;padding:4px;border:1px solid var(--line)}
+.orig{font-size:12.5px;color:var(--muted);margin:0 0 4px;overflow-wrap:anywhere}
 .disclaimer{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
 @media (max-width:640px){
   .top .wrap{gap:10px}
@@ -154,8 +155,8 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
       <a href="#about"><span lang="en">About</span><span lang="zh-CN">关于本站</span></a>
     </nav>
     <div class="lang" role="group" aria-label="Language / 语言">
-      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
-      <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+      <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
     </div>
   </div>
 </header>
@@ -263,7 +264,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
 <section id="trials">
 <div class="wrap">
   <h2><span lang="en">Open clinical trials</span><span lang="zh-CN">正在招募的临床试验</span></h2>
-  <p class="sub"><span lang="en">Trials listed as recruiting or not yet recruiting on ClinicalTrials.gov. Trials with a site in China are marked. Titles are shown exactly as registered, in English.</span><span lang="zh-CN">ClinicalTrials.gov 上状态为"招募中"或"尚未招募"的试验，在中国设有研究中心的已标注。试验标题保留英文原文，以免翻译失真。</span></p>
+  <p class="sub"><span lang="en">Trials listed as recruiting or not yet recruiting on ClinicalTrials.gov. Trials with a site in China are marked. Titles are shown exactly as registered. On the Chinese page, titles are AI-translated with the English original underneath.</span><span lang="zh-CN">ClinicalTrials.gov 上状态为"招募中"或"尚未招募"的试验，在中国设有研究中心的已标注。中文标题由 AI 翻译，仅供参考，每条下方附英文原文，请以原文为准。</span></p>
   <div class="tabs" role="tablist" id="trialTabs"></div>
   <div class="list" id="trialList"></div>
   <details id="closedWrap" hidden><summary id="closedSummary"></summary><div class="list" id="closedList" style="margin-top:10px"></div></details>
@@ -274,7 +275,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
 <section id="papers">
 <div class="wrap">
   <h2><span lang="en">Latest research</span><span lang="zh-CN">最新文献</span></h2>
-  <p class="sub"><span lang="en">Papers from PubMed on CCS, GNET and EWSR1::ATF1 / EWSR1::CREB1 (childhood "clear cell sarcoma of the kidney", a different disease, is excluded). "Main topic" shows papers whose title is about the disease; "All" also includes papers that only mention it. Titles are shown exactly as published.</span><span lang="zh-CN">来自 PubMed 的透明细胞肉瘤、GNET 及 EWSR1::ATF1 / EWSR1::CREB1 相关论文（已排除另一种疾病"儿童肾透明细胞肉瘤"）。"主题相关"只显示标题以本病为主题的论文，"全部"还包括仅在摘要中提及本病的论文。论文标题保留英文原文。</span></p>
+  <p class="sub"><span lang="en">Papers from PubMed on CCS, GNET and EWSR1::ATF1 / EWSR1::CREB1 (childhood "clear cell sarcoma of the kidney", a different disease, is excluded). "Main topic" shows papers whose title is about the disease; "All" also includes papers that only mention it. Titles are shown exactly as published; the Chinese page adds AI translations.</span><span lang="zh-CN">来自 PubMed 的透明细胞肉瘤、GNET 及 EWSR1::ATF1 / EWSR1::CREB1 相关论文（已排除另一种疾病"儿童肾透明细胞肉瘤"）。"主题相关"只显示标题以本病为主题的论文，"全部"还包括仅在摘要中提及本病的论文。中文标题由 AI 翻译，仅供参考，下方附英文原文。</span></p>
   <div class="tools">
     <div class="chips" id="paperChips"></div>
     <input type="search" id="paperSearch" aria-label="Search papers">
@@ -336,7 +337,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
   <p class="sub"><span lang="en">Organisations that support people with clear cell sarcoma. Most are in English and US-based; check eligibility for any programme before applying.</span><span lang="zh-CN">以下机构为透明细胞肉瘤患者提供支持。多数为英文、总部在美国的机构，申请任何项目前请先确认资格要求。</span></p>
   <div class="grid2 res">
     <div class="card">
-      <h3><a class="big" href="https://www.clearcellsarcoma.org/">Clear Cell Sarcoma Foundation</a></h3>
+      <h3><a class="big" href="https://www.clearcellsarcoma.org/"><span lang="en">Clear Cell Sarcoma Foundation</span><span lang="zh-CN">透明细胞肉瘤基金会（Clear Cell Sarcoma Foundation）</span></a></h3>
       <p lang="en">The main patient foundation for this disease (US, founded 2016). Plain-language guides, a newly diagnosed checklist, a specialist directory, a hand-picked trial list, and it funds research.</p>
       <p lang="zh-CN">专门针对本病的患者基金会（美国，2016 年成立），提供通俗易懂的指南、新确诊患者清单、专科医生名录和精选试验列表，并资助相关研究。</p>
       <p class="src"><a href="https://www.clearcellsarcoma.org/patients"><span lang="en">For patients</span><span lang="zh-CN">患者专区</span></a> · <a href="https://www.clearcellsarcoma.org/research"><span lang="en">Research</span><span lang="zh-CN">研究</span></a></p>
@@ -352,12 +353,12 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
       <p lang="zh-CN">Sarcoma Alliance 提供资助，帮助患者向肉瘤专科医生寻求第二诊疗意见。对这样罕见的疾病，由诊治过较多病例的中心复核很有价值。</p>
     </div>
     <div class="card">
-      <h3><a class="big" href="https://www.cancer.gov/pediatric-adult-rare-tumor">NCI MyPART</a></h3>
+      <h3><a class="big" href="https://www.cancer.gov/pediatric-adult-rare-tumor"><span lang="en">NCI MyPART</span><span lang="zh-CN">美国国家癌症研究所罕见肿瘤网络（NCI MyPART）</span></a></h3>
       <p lang="en">The US National Cancer Institute's rare tumour network, with a natural history study and rare tumour clinics. It lists the Clear Cell Sarcoma Foundation as a partner.</p>
       <p lang="zh-CN">美国国家癌症研究所的罕见肿瘤网络，设有自然史研究和罕见肿瘤门诊，透明细胞肉瘤基金会是其合作伙伴。</p>
     </div>
     <div class="card">
-      <h3><a class="big" href="https://www.sarcoma-patients.org/">Sarcoma Patient Advocacy Global Network</a></h3>
+      <h3><a class="big" href="https://www.sarcoma-patients.org/"><span lang="en">Sarcoma Patient Advocacy Global Network</span><span lang="zh-CN">全球肉瘤患者倡导网络（SPAGN）</span></a></h3>
       <p lang="en">A worldwide network of sarcoma patient groups. Useful for finding support organisations in other countries.</p>
       <p lang="zh-CN">全球肉瘤患者组织网络，可用于查找其他国家和地区的患者支持组织。</p>
     </div>
@@ -376,8 +377,8 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
   <div class="grid2">
     <div class="card">
       <h3><span lang="en">How it works</span><span lang="zh-CN">运作方式</span></h3>
-      <p lang="en">An automatic script runs every morning (about 08:00 Hong Kong time). It queries the official PubMed and ClinicalTrials.gov databases and copies titles, dates and statuses exactly as published, each with its PMID or NCT number and a link. <b>No AI writes or summarises the live sections</b>, so nothing there can be invented. If a database cannot be reached, the site says so and keeps the last good data.</p>
-      <p lang="zh-CN">每天早上（香港时间约 8:00）自动运行一次程序，检索官方的 PubMed 和 ClinicalTrials.gov 数据库，原样复制标题、日期和状态，每条都附有 PMID 或 NCT 编号及链接。<b>试验和文献部分不经过任何 AI 撰写或总结</b>，因此不会凭空捏造内容。如果某个数据库无法访问，页面会显示提示，并保留上一次的有效数据。</p>
+      <p lang="en">An automatic script runs every morning (about 08:00 Hong Kong time). It queries the official PubMed and ClinicalTrials.gov databases and copies titles, dates and statuses exactly as published, each with its PMID or NCT number and a link. <b>No AI decides what is listed or writes summaries</b>, so no paper or trial can be invented. The only AI step is translating titles into Chinese; those translations are labelled and the English original is always shown. If a database cannot be reached, the site says so and keeps the last good data.</p>
+      <p lang="zh-CN">每天早上（香港时间约 8:00）自动运行一次程序，检索官方的 PubMed 和 ClinicalTrials.gov 数据库，原样复制标题、日期和状态，每条都附有 PMID 或 NCT 编号及链接。<b>收录哪些试验和文献完全由程序决定，不经 AI 撰写或总结</b>，因此不会凭空捏造内容。唯一用到 AI 的环节是把标题翻译成中文，译文均有标注，并始终附上英文原文。如果某个数据库无法访问，页面会显示提示，并保留上一次的有效数据。</p>
     </div>
     <div class="card">
       <h3><span lang="en">Not covered automatically</span><span lang="zh-CN">未自动覆盖的内容</span></h3>
@@ -433,7 +434,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
     }
   };
   var COUNTRY_ZH = {"China":"中国","United States":"美国","Japan":"日本","Korea, Republic of":"韩国","Spain":"西班牙","Italy":"意大利","France":"法国","Germany":"德国","United Kingdom":"英国","Canada":"加拿大","Australia":"澳大利亚","Taiwan":"中国台湾","Hong Kong":"中国香港","Netherlands":"荷兰","Belgium":"比利时","Switzerland":"瑞士","Singapore":"新加坡","India":"印度","Israel":"以色列","Poland":"波兰","Denmark":"丹麦","Sweden":"瑞典","Norway":"挪威","Austria":"奥地利"};
-  var lang = "en", feed = null, trialTab = "ccs", paperFilter = "focus", paperQuery = "", paperShown = 25;
+  var lang = "zh", zh = {papers:{}, trials:{}}, feed = null, trialTab = "ccs", paperFilter = "focus", paperQuery = "", paperShown = 25;
 
   function t(k){ return (T[lang] && T[lang][k]) || T.en[k] || k; }
   function el(tag, attrs){
@@ -465,6 +466,12 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
     if (!p || !p.length) return "";
     var s = p.map(function(x){ return x.replace("EARLY_PHASE1","0").replace("PHASE","").replace("NA","–"); }).join("/");
     return lang === "zh" ? s + t("phase") : t("phase") + " " + s;
+  }
+  function zhT(kind, id){ var m = zh[kind] && zh[kind][id]; return lang === "zh" && m ? (typeof m === "string" ? m : m.t) : ""; }
+  function titleNodes(kind, id, orig, url){
+    var tr = zhT(kind, id);
+    return [el("div", {cls:"t"}, el("a", {href:url, text:tr || orig, target:"_blank", rel:"noopener"})),
+            tr ? el("div", {cls:"orig", text:"英文原文：" + orig}) : null];
   }
   function country(c){ return lang === "zh" ? (COUNTRY_ZH[c] || c) : c; }
 
@@ -513,10 +520,10 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
     if (x.sponsor) meta.push(t("sponsor") + ": " + x.sponsor);
     meta.push(t("sites") + ": " + (sites.length ? sites.slice(0, 8).join(", ") + (sites.length > 8 ? " +" + (sites.length - 8) : "") : t("noSites")));
     if (!x.open && x.closed_seen) meta.push(t("closedOn") + " " + fmtDate(x.closed_seen));
-    return el("article", {cls:"item"}, kick,
-      el("div", {cls:"t"}, el("a", {href:x.url, text:x.title, target:"_blank", rel:"noopener"})),
+    var tn = titleNodes("trials", id, x.title, x.url), zc = lang === "zh" && zh.trials[id] && zh.trials[id].c;
+    return el("article", {cls:"item"}, kick, tn[0], tn[1],
       el("div", {cls:"m", text: meta.join(" · ")}),
-      x.conditions && x.conditions.length ? el("div", {cls:"m", text: x.conditions.join(" · ")}) : null);
+      zc ? el("div", {cls:"m", text: zc}) : (x.conditions && x.conditions.length ? el("div", {cls:"m", text: x.conditions.join(" · ")}) : null));
   }
 
   function renderTrials(){
@@ -562,7 +569,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
       if (paperFilter === "focus" && !p.focus) return false;
       if (paperFilter === "trial" && !p.is_trial) return false;
       if (paperFilter === "new" && !isNew(p)) return false;
-      if (q && (p.title + " " + p.journal).toLowerCase().indexOf(q) < 0) return false;
+      if (q && (p.title + " " + p.journal + " " + (zh.papers[k] || "")).toLowerCase().indexOf(q) < 0) return false;
       return true;
     });
     ids.sort(function(a, b){ return String(all[b].pubdate).localeCompare(String(all[a].pubdate)) || Number(b) - Number(a); });
@@ -571,8 +578,8 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
       var p = all[k], kick = el("div", {cls:"ev kicker", style:"margin:0"});
       if (p.is_trial) kick.appendChild(el("span", {cls:"pill green", text:t("trialRep")}));
       if (isNew(p)) kick.appendChild(el("span", {cls:"pill amber", text:t("isNew")}));
-      list.appendChild(el("article", {cls:"item"}, kick.childNodes.length ? kick : null,
-        el("div", {cls:"t"}, el("a", {href:p.url, text:p.title, target:"_blank", rel:"noopener"})),
+      var tn = titleNodes("papers", k, p.title, p.url);
+      list.appendChild(el("article", {cls:"item"}, kick.childNodes.length ? kick : null, tn[0], tn[1],
         el("div", {cls:"m", text:[p.journal, fmtDate(p.pubdate), "PMID " + k].filter(Boolean).join(" · ")})));
     });
     more.hidden = ids.length <= paperShown;
@@ -586,10 +593,10 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
     var tr = feed.trials || {}, pa = feed.papers || {};
     var trials = Object.keys(tr).filter(function(k){ return tr[k].open && tr[k].focus; })
       .sort(function(a, b){ return String(tr[b].first_posted).localeCompare(String(tr[a].first_posted)); }).slice(0, 2)
-      .map(function(k){ return {kind:"kTrial", title:tr[k].title, url:tr[k].url, date:tr[k].first_posted, china:tr[k].china}; });
+      .map(function(k){ return {kind:"kTrial", title:zhT("trials", k) || tr[k].title, url:tr[k].url, date:tr[k].first_posted, china:tr[k].china}; });
     var papers = Object.keys(pa).filter(function(k){ return pa[k].focus; })
       .sort(function(a, b){ return String(pa[b].pubdate).localeCompare(String(pa[a].pubdate)); }).slice(0, 3)
-      .map(function(k){ return {kind:"kPaper", title:pa[k].title, url:pa[k].url, date:pa[k].pubdate}; });
+      .map(function(k){ return {kind:"kPaper", title:zhT("papers", k) || pa[k].title, url:pa[k].url, date:pa[k].pubdate}; });
     trials.concat(papers).forEach(function(x){
       list.appendChild(el("div", {cls:"row"},
         el("span", {cls:"pill " + (x.kind === "kTrial" ? "green" : "blue"), text:t(x.kind)}),
@@ -611,12 +618,14 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
   var saved = null;
   try { saved = localStorage.getItem("ccs-lang"); } catch (e) {}
   var qs = new URLSearchParams(location.search).get("lang");
-  setLang(qs || saved || ((navigator.language || "").toLowerCase().indexOf("zh") === 0 ? "zh" : "en"));
+  setLang(qs || saved || "zh");
 
+  var zhLoad = fetch("data/zh.json", {cache:"no-store"}).then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(j){ if (j && j.papers && j.trials) zh = j; }).catch(function(){});
   fetch("data/feed.json", {cache:"no-store"}).then(function(r){
     if (!r.ok) throw new Error(r.status);
     return r.json();
-  }).then(function(j){ feed = j; renderAll(); }).catch(function(){
+  }).then(function(j){ return zhLoad.then(function(){ feed = j; renderAll(); }); }).catch(function(){
     feed = null; renderAll();
     var w = document.getElementById("warn");
     if (location.protocol !== "file:") { w.textContent = t("loadFail"); w.hidden = false; }
