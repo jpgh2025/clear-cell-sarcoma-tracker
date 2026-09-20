@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CCS &amp; GNET Research Tracker · 透明细胞肉瘤研究追踪</title>
 <meta name="description" content="A bilingual, automatically updated tracker of research and open clinical trials for clear cell sarcoma (CCS) and gastrointestinal neuroectodermal tumour (GNET). 透明细胞肉瘤与胃肠道神经外胚层肿瘤的中英文研究与临床试验追踪。">
+<meta name="keywords" content="clear cell sarcoma, CCS, GNET, gastrointestinal neuroectodermal tumour, EWSR1-ATF1, EWSR1::ATF1, sarcoma clinical trials, 透明细胞肉瘤, 胃肠道神经外胚层肿瘤, 软组织肉瘤, 临床试验, EWSR1融合">
+<link rel="canonical" href="https://jpgh2025.github.io/clear-cell-sarcoma-tracker/">
+<link rel="alternate" hreflang="en" href="https://jpgh2025.github.io/clear-cell-sarcoma-tracker/?lang=en">
+<link rel="alternate" hreflang="zh-Hans" href="https://jpgh2025.github.io/clear-cell-sarcoma-tracker/?lang=zh">
+<link rel="alternate" hreflang="x-default" href="https://jpgh2025.github.io/clear-cell-sarcoma-tracker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Clear Cell Sarcoma & GNET Research Tracker · 透明细胞肉瘤研究追踪">
+<meta property="og:description" content="Daily-updated research and open clinical trials for clear cell sarcoma and GNET, in English and Chinese. 每日更新的透明细胞肉瘤研究与临床试验信息，中英双语。">
+<meta property="og:url" content="https://jpgh2025.github.io/clear-cell-sarcoma-tracker/">
+<meta property="og:image" content="https://jpgh2025.github.io/clear-cell-sarcoma-tracker/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0f6e6e">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MedicalWebPage","name":"Clear Cell Sarcoma & GNET Research Tracker","url":"https://jpgh2025.github.io/clear-cell-sarcoma-tracker/","inLanguage":["en","zh-Hans"],"lastReviewed":"2026-09-20","audience":{"@type":"Patient"},"about":[{"@type":"MedicalCondition","name":"Clear cell sarcoma","alternateName":["CCS","透明细胞肉瘤","Clear cell sarcoma of soft tissue"]},{"@type":"MedicalCondition","name":"Gastrointestinal neuroectodermal tumour","alternateName":["GNET","胃肠道神经外胚层肿瘤","Clear cell sarcoma-like tumour of the gastrointestinal tract"]}]}
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f6e6e'/%3E%3Cpath d='M9 22c3-10 11-10 14-12M9 12c4 2 10 8 14 10' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -104,6 +119,17 @@ table.recist th{font-size:13px;color:var(--muted);font-weight:600}
 ol.q{margin:0;padding-left:20px}
 ol.q li{margin-bottom:6px}
 footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.latest{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.latest[hidden]{display:none}
+.latest h2{font-size:15px;margin:0 0 8px;color:var(--muted);font-weight:600}
+.latest .row{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-top:1px solid var(--line);min-width:0}
+.latest .row:first-of-type{border-top:0}
+.latest .row a{color:var(--ink);text-decoration:none;font-weight:600;overflow-wrap:anywhere}
+.latest .row a:hover{color:var(--accent);text-decoration:underline}
+.latest .row .d{font-size:13px;color:var(--muted);white-space:nowrap;margin-left:auto;padding-left:8px}
+.res a.big{font-weight:600}
+.share{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.share img{width:96px;height:96px;border-radius:8px;background:#fff;padding:4px;border:1px solid var(--line)}
 .disclaimer{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
 @media (max-width:640px){
   .top .wrap{gap:10px}
@@ -124,6 +150,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
       <a href="#trials"><span lang="en">Open trials</span><span lang="zh-CN">招募中的试验</span></a>
       <a href="#papers"><span lang="en">Latest research</span><span lang="zh-CN">最新文献</span></a>
       <a href="#guide"><span lang="en">For families</span><span lang="zh-CN">患者与家属</span></a>
+      <a href="#resources"><span lang="en">Resources</span><span lang="zh-CN">相关资源</span></a>
       <a href="#about"><span lang="en">About</span><span lang="zh-CN">关于本站</span></a>
     </nav>
     <div class="lang" role="group" aria-label="Language / 语言">
@@ -141,6 +168,11 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
     <p class="lede"><span lang="en">Every morning this site checks PubMed and ClinicalTrials.gov for new papers and recruiting trials on clear cell sarcoma (CCS), gastrointestinal neuroectodermal tumour (GNET) and EWSR1::ATF1-driven tumours, alongside a plain-language summary of the key evidence so far.</span><span lang="zh-CN">本站每天早上自动检索 PubMed 和 ClinicalTrials.gov，收录关于透明细胞肉瘤（CCS）、胃肠道神经外胚层肿瘤（GNET）以及 EWSR1::ATF1 融合驱动肿瘤的新论文和正在招募的临床试验，并用通俗语言整理目前的关键研究证据。</span></p>
     <div class="status" id="stats" aria-live="polite"></div>
     <div class="banner" id="warn" hidden></div>
+    <div class="latest" id="latest" hidden>
+      <h2><span lang="en">Latest on CCS &amp; GNET</span><span lang="zh-CN">最新动态</span></h2>
+      <div id="latestList"></div>
+    </div>
+    <noscript><p class="banner">This page needs JavaScript to show the live trials and papers. 本页需要启用 JavaScript 才能显示试验和文献。</p></noscript>
   </div>
 </div>
 
@@ -298,6 +330,46 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
 </div>
 </section>
 
+<section id="resources">
+<div class="wrap">
+  <h2><span lang="en">Resources and support</span><span lang="zh-CN">相关资源与支持</span></h2>
+  <p class="sub"><span lang="en">Organisations that support people with clear cell sarcoma. Most are in English and US-based; check eligibility for any programme before applying.</span><span lang="zh-CN">以下机构为透明细胞肉瘤患者提供支持。多数为英文、总部在美国的机构，申请任何项目前请先确认资格要求。</span></p>
+  <div class="grid2 res">
+    <div class="card">
+      <h3><a class="big" href="https://www.clearcellsarcoma.org/">Clear Cell Sarcoma Foundation</a></h3>
+      <p lang="en">The main patient foundation for this disease (US, founded 2016). Plain-language guides, a newly diagnosed checklist, a specialist directory, a hand-picked trial list, and it funds research.</p>
+      <p lang="zh-CN">专门针对本病的患者基金会（美国，2016 年成立），提供通俗易懂的指南、新确诊患者清单、专科医生名录和精选试验列表，并资助相关研究。</p>
+      <p class="src"><a href="https://www.clearcellsarcoma.org/patients"><span lang="en">For patients</span><span lang="zh-CN">患者专区</span></a> · <a href="https://www.clearcellsarcoma.org/research"><span lang="en">Research</span><span lang="zh-CN">研究</span></a></p>
+    </div>
+    <div class="card">
+      <h3><a class="big" href="https://www.facebook.com/groups/1442782715945878"><span lang="en">CCS family support group</span><span lang="zh-CN">CCS 病友与家属互助群</span></a></h3>
+      <p lang="en">A Facebook group run with the foundation where patients and families share experiences.</p>
+      <p lang="zh-CN">由基金会支持的 Facebook 群组，患者和家属在这里交流经验（英文）。</p>
+    </div>
+    <div class="card">
+      <h3><a class="big" href="https://sarcomaalliance.org/second-opinion-grants/"><span lang="en">Second-opinion grants</span><span lang="zh-CN">第二诊疗意见资助</span></a></h3>
+      <p lang="en">The Sarcoma Alliance offers grants toward a second opinion from a sarcoma specialist. For a disease this rare, a review by a centre that has seen many cases can be valuable.</p>
+      <p lang="zh-CN">Sarcoma Alliance 提供资助，帮助患者向肉瘤专科医生寻求第二诊疗意见。对这样罕见的疾病，由诊治过较多病例的中心复核很有价值。</p>
+    </div>
+    <div class="card">
+      <h3><a class="big" href="https://www.cancer.gov/pediatric-adult-rare-tumor">NCI MyPART</a></h3>
+      <p lang="en">The US National Cancer Institute's rare tumour network, with a natural history study and rare tumour clinics. It lists the Clear Cell Sarcoma Foundation as a partner.</p>
+      <p lang="zh-CN">美国国家癌症研究所的罕见肿瘤网络，设有自然史研究和罕见肿瘤门诊，透明细胞肉瘤基金会是其合作伙伴。</p>
+    </div>
+    <div class="card">
+      <h3><a class="big" href="https://www.sarcoma-patients.org/">Sarcoma Patient Advocacy Global Network</a></h3>
+      <p lang="en">A worldwide network of sarcoma patient groups. Useful for finding support organisations in other countries.</p>
+      <p lang="zh-CN">全球肉瘤患者组织网络，可用于查找其他国家和地区的患者支持组织。</p>
+    </div>
+    <div class="card">
+      <h3><a class="big" href="http://www.chinadrugtrials.org.cn">药物临床试验登记与信息公示平台</a></h3>
+      <p lang="en">China's official drug trial registry. Many Chinese trials are listed only here. Search 肉瘤 or 透明细胞肉瘤.</p>
+      <p lang="zh-CN">国家药监局官方试验登记平台，许多国内试验只在这里登记。可检索"肉瘤"或"透明细胞肉瘤"。</p>
+    </div>
+  </div>
+</div>
+</section>
+
 <section id="about">
 <div class="wrap">
   <h2><span lang="en">About this site</span><span lang="zh-CN">关于本站</span></h2>
@@ -324,7 +396,12 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
 <footer>
   <div class="wrap">
     <span lang="en">Data: PubMed (U.S. National Library of Medicine) and ClinicalTrials.gov. Source code:</span><span lang="zh-CN">数据来源：PubMed（美国国家医学图书馆）与 ClinicalTrials.gov。源代码：</span>
-    <a id="repoLink" href="https://github.com/">GitHub</a>
+    <a id="repoLink" href="https://github.com/jpgh2025/clear-cell-sarcoma-tracker">GitHub</a> ·
+    <a href="https://github.com/jpgh2025/clear-cell-sarcoma-tracker/issues/new"><span lang="en">Report an error or suggest a source</span><span lang="zh-CN">报告错误或推荐资料</span></a>
+    <div class="share" style="margin-top:16px">
+      <img src="qr.svg" alt="QR code for this site" width="96" height="96" loading="lazy">
+      <div><b><span lang="en">Share this page</span><span lang="zh-CN">分享本页</span></b><br><span lang="en">Scan with a phone camera or WeChat.</span><span lang="zh-CN">用手机相机或微信扫码打开。</span><br>jpgh2025.github.io/clear-cell-sarcoma-tracker</div>
+    </div>
   </div>
 </footer>
 
@@ -341,7 +418,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
       RECRUITING:"Recruiting", NOT_YET_RECRUITING:"Not yet recruiting", phase:"Phase", china:"Site in China", isNew:"New",
       posted:"First posted", sponsor:"Sponsor", sites:"Sites", noSites:"sites not listed", closedOn:"noticed",
       all:"All", trialRep:"Trial reports", recent:"New (30 days)", search:"Search titles…", more:"Show more",
-      noPapers:"No papers match.", added:"added", focus:"Main topic", focusTrial:"CCS / GNET specific"
+      noPapers:"No papers match.", added:"added", focus:"Main topic", focusTrial:"CCS / GNET specific", kPaper:"Paper", kTrial:"Trial"
     },
     zh: {
       updated:"最近更新", openCcs:"个 CCS / GNET 试验招募中", papers:"篇论文已收录", newPapers:"篇近 30 天新增论文",
@@ -352,7 +429,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
       RECRUITING:"招募中", NOT_YET_RECRUITING:"尚未招募", phase:"期", china:"中国有研究中心", isNew:"新",
       posted:"首次登记", sponsor:"申办方", sites:"研究中心", noSites:"未列出中心", closedOn:"发现于",
       all:"全部", trialRep:"临床试验报告", recent:"近 30 天新增", search:"搜索标题…", more:"显示更多",
-      noPapers:"没有符合条件的论文。", added:"收录于", focus:"主题相关", focusTrial:"专项 CCS / GNET 试验"
+      noPapers:"没有符合条件的论文。", added:"收录于", focus:"主题相关", focusTrial:"专项 CCS / GNET 试验", kPaper:"论文", kTrial:"试验"
     }
   };
   var COUNTRY_ZH = {"China":"中国","United States":"美国","Japan":"日本","Korea, Republic of":"韩国","Spain":"西班牙","Italy":"意大利","France":"法国","Germany":"德国","United Kingdom":"英国","Canada":"加拿大","Australia":"澳大利亚","Taiwan":"中国台湾","Hong Kong":"中国香港","Netherlands":"荷兰","Belgium":"比利时","Switzerland":"瑞士","Singapore":"新加坡","India":"印度","Israel":"以色列","Poland":"波兰","Denmark":"丹麦","Sweden":"瑞典","Norway":"挪威","Austria":"奥地利"};
@@ -502,16 +579,34 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
     more.textContent = t("more") + " (" + (ids.length - paperShown) + ")";
   }
 
-  function renderAll(){ renderStats(); renderTrials(); renderPapers(); }
+  function renderLatest(){
+    var box = document.getElementById("latest"), list = document.getElementById("latestList");
+    clear(list);
+    if (!feed) { box.hidden = true; return; }
+    var tr = feed.trials || {}, pa = feed.papers || {};
+    var trials = Object.keys(tr).filter(function(k){ return tr[k].open && tr[k].focus; })
+      .sort(function(a, b){ return String(tr[b].first_posted).localeCompare(String(tr[a].first_posted)); }).slice(0, 2)
+      .map(function(k){ return {kind:"kTrial", title:tr[k].title, url:tr[k].url, date:tr[k].first_posted, china:tr[k].china}; });
+    var papers = Object.keys(pa).filter(function(k){ return pa[k].focus; })
+      .sort(function(a, b){ return String(pa[b].pubdate).localeCompare(String(pa[a].pubdate)); }).slice(0, 3)
+      .map(function(k){ return {kind:"kPaper", title:pa[k].title, url:pa[k].url, date:pa[k].pubdate}; });
+    trials.concat(papers).forEach(function(x){
+      list.appendChild(el("div", {cls:"row"},
+        el("span", {cls:"pill " + (x.kind === "kTrial" ? "green" : "blue"), text:t(x.kind)}),
+        x.china ? el("span", {cls:"pill red", text:"🇨🇳"}) : null,
+        el("a", {href:x.url, text:x.title, target:"_blank", rel:"noopener"}),
+        el("span", {cls:"d", text:fmtDate(x.date)})));
+    });
+    box.hidden = !list.childNodes.length;
+  }
+
+  function renderAll(){ renderStats(); renderLatest(); renderTrials(); renderPapers(); }
 
   document.querySelectorAll("[data-set-lang]").forEach(function(b){
     b.addEventListener("click", function(){ setLang(b.getAttribute("data-set-lang")); });
   });
   document.getElementById("paperSearch").addEventListener("input", function(e){ paperQuery = e.target.value; paperShown = 25; renderPapers(); });
   document.getElementById("paperMore").addEventListener("click", function(){ paperShown += 25; renderPapers(); });
-
-  var m = location.hostname.match(/^([^.]+)\.github\.io$/);
-  if (m) document.getElementById("repoLink").href = "https://github.com/" + m[1] + "/" + (location.pathname.split("/")[1] || "");
 
   var saved = null;
   try { saved = localStorage.getItem("ccs-lang"); } catch (e) {}

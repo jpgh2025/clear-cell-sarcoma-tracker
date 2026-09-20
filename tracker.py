@@ -200,7 +200,7 @@ def save_feed(feed):
     os.makedirs(os.path.dirname(FEED_FILE), exist_ok=True)
     tmp = FEED_FILE + ".tmp"
     with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(feed, f, ensure_ascii=False, indent=1, sort_keys=True)
+        json.dump(feed, f, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
     os.replace(tmp, FEED_FILE)
 
 
