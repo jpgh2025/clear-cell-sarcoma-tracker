@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCS &amp; GNET Research Tracker · 透明细胞肉瘤研究追踪</title>
+<meta name="description" content="A bilingual, automatically updated tracker of research and open clinical trials for clear cell sarcoma (CCS) and gastrointestinal neuroectodermal tumour (GNET). 透明细胞肉瘤与胃肠道神经外胚层肿瘤的中英文研究与临床试验追踪。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f6e6e'/%3E%3Cpath d='M9 22c3-10 11-10 14-12M9 12c4 2 10 8 14 10' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --surface-2:#fbfaf7; --ink:#1c2226; --muted:#5a656e; --line:#e2dfd7;
+  --accent:#0f6e6e; --accent-ink:#ffffff; --accent-soft:#e1efec;
+  --red:#a8322a; --red-soft:#fbe8e5; --amber:#8a5a00; --amber-soft:#fcf0d6; --blue:#1f5c9e; --blue-soft:#e5edf8;
+  --shadow:0 1px 2px rgba(20,30,30,.05),0 2px 8px rgba(20,30,30,.04);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121617; --surface:#1a2022; --surface-2:#161b1d; --ink:#e7ebec; --muted:#9aa6ab; --line:#2c3538;
+    --accent:#4fb8ad; --accent-ink:#0c1414; --accent-soft:#18302e;
+    --red:#f08b80; --red-soft:#3a1f1c; --amber:#e8b95a; --amber-soft:#352a14; --blue:#8db8ec; --blue-soft:#1b2a3d;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121617; --surface:#1a2022; --surface-2:#161b1d; --ink:#e7ebec; --muted:#9aa6ab; --line:#2c3538;
+  --accent:#4fb8ad; --accent-ink:#0c1414; --accent-soft:#18302e;
+  --red:#f08b80; --red-soft:#3a1f1c; --amber:#e8b95a; --amber-soft:#352a14; --blue:#8db8ec; --blue-soft:#1b2a3d;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+html[data-lang="en"] [lang="zh-CN"], html[data-lang="zh"] [lang="en"]{display:none !important}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;height:56px}
+.brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block}
+nav.links{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+nav.links::-webkit-scrollbar{display:none}
+nav.links a{color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap;padding:4px 0}
+nav.links a:hover{color:var(--ink)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--surface);flex-shrink:0}
+.lang button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;padding:3px 10px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.hero{padding:48px 0 28px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font-size:clamp(28px,4.6vw,42px);line-height:1.15;letter-spacing:-.02em;margin:0 0 14px;max-width:22ch}
+html[data-lang="zh"] h1{max-width:18em;letter-spacing:0}
+.lede{font-size:18px;color:var(--muted);max-width:62ch;margin:0}
+.status{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:24px;line-height:1.2;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+.banner{margin-top:14px;padding:10px 14px;border-radius:10px;font-size:14px;background:var(--amber-soft);color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 30%,transparent)}
+.banner[hidden]{display:none}
+section{padding:36px 0;border-top:1px solid var(--line)}
+h2{font-size:24px;letter-spacing:-.01em;margin:0 0 6px}
+h3{font-size:17px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 20px;max-width:70ch}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
+.card p{margin:0 0 8px}
+.card p:last-child{margin-bottom:0}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:14px}
+.fact{background:var(--accent-soft);border-radius:12px;padding:12px 14px}
+.fact small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+html[data-lang="zh"] .fact small{text-transform:none;letter-spacing:0}
+.fact div{font-weight:600}
+.kicker{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill.green{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.pill.red{background:var(--red-soft);color:var(--red);border-color:transparent}
+.pill.amber{background:var(--amber-soft);color:var(--amber);border-color:transparent}
+.pill.blue{background:var(--blue-soft);color:var(--blue);border-color:transparent}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:10px 0}
+.num{border-left:3px solid var(--accent);padding:2px 0 2px 10px}
+.num b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.25}
+.num span{font-size:13px;color:var(--muted)}
+.src{font-size:13px;color:var(--muted)}
+.note{font-size:14px;color:var(--muted);margin-top:14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button,.chips button{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"],.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs button .n{opacity:.7;margin-left:4px;font-variant-numeric:tabular-nums}
+.list{display:grid;gap:10px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
+.item .t{font-weight:600;line-height:1.4;margin:6px 0 4px;overflow-wrap:anywhere}
+.item .t a{color:var(--ink);text-decoration:none}
+.item .t a:hover{color:var(--accent);text-decoration:underline}
+.item .m{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+input[type="search"]{font:inherit;font-size:14px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);min-width:0;flex:1 1 200px;max-width:320px}
+.more{margin-top:12px;font:inherit;font-size:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 16px;border-radius:999px;cursor:pointer}
+.empty{padding:18px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center}
+details{margin-top:14px}
+summary{cursor:pointer;color:var(--muted);font-size:14px}
+table.recist{width:100%;border-collapse:collapse;font-size:15px}
+table.recist td,table.recist th{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+table.recist th{font-size:13px;color:var(--muted);font-weight:600}
+ol.q{margin:0;padding-left:20px}
+ol.q li{margin-bottom:6px}
+footer{padding:28px 0 48px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.disclaimer{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
+@media (max-width:640px){
+  .top .wrap{gap:10px}
+  nav.links{display:none}
+  .hero{padding-top:32px}
+  .lede{font-size:16px}
+  .stat b{font-size:20px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><i></i><span lang="en">CCS &amp; GNET Tracker</span><span lang="zh-CN">透明细胞肉瘤研究追踪</span></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#overview"><span lang="en">The disease</span><span lang="zh-CN">疾病概况</span></a>
+      <a href="#evidence"><span lang="en">Key evidence</span><span lang="zh-CN">关键证据</span></a>
+      <a href="#trials"><span lang="en">Open trials</span><span lang="zh-CN">招募中的试验</span></a>
+      <a href="#papers"><span lang="en">Latest research</span><span lang="zh-CN">最新文献</span></a>
+      <a href="#guide"><span lang="en">For families</span><span lang="zh-CN">患者与家属</span></a>
+      <a href="#about"><span lang="en">About</span><span lang="zh-CN">关于本站</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language / 语言">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="zh" aria-pressed="false">中文</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow"><span lang="en">Research tracker · updated daily</span><span lang="zh-CN">研究追踪 · 每日更新</span></p>
+    <h1><span lang="en">Clear cell sarcoma &amp; GNET: research and open clinical trials</span><span lang="zh-CN">透明细胞肉瘤与胃肠道神经外胚层肿瘤：研究进展与招募中的临床试验</span></h1>
+    <p class="lede"><span lang="en">Every morning this site checks PubMed and ClinicalTrials.gov for new papers and recruiting trials on clear cell sarcoma (CCS), gastrointestinal neuroectodermal tumour (GNET) and EWSR1::ATF1-driven tumours, alongside a plain-language summary of the key evidence so far.</span><span lang="zh-CN">本站每天早上自动检索 PubMed 和 ClinicalTrials.gov，收录关于透明细胞肉瘤（CCS）、胃肠道神经外胚层肿瘤（GNET）以及 EWSR1::ATF1 融合驱动肿瘤的新论文和正在招募的临床试验，并用通俗语言整理目前的关键研究证据。</span></p>
+    <div class="status" id="stats" aria-live="polite"></div>
+    <div class="banner" id="warn" hidden></div>
+  </div>
+</div>
+
+<section id="overview">
+<div class="wrap">
+  <h2><span lang="en">About the disease</span><span lang="zh-CN">疾病概况</span></h2>
+  <p class="sub"><span lang="en">Two rare tumours, one shared genetic driver.</span><span lang="zh-CN">两种罕见肿瘤，同一个基因驱动。</span></p>
+  <div class="grid2">
+    <div class="card">
+      <h3><span lang="en">Clear cell sarcoma (CCS)</span><span lang="zh-CN">透明细胞肉瘤（CCS）</span></h3>
+      <p lang="en">A rare soft-tissue sarcoma that most often starts near the tendons and aponeuroses of the arms and legs, usually in adolescents and young adults. It shares some features with melanoma under the microscope (it often expresses S100, SOX10, HMB-45 and Melan-A), which is why it was once called "melanoma of soft parts", but it is a different disease with a different cause.</p>
+      <p lang="zh-CN">一种罕见的软组织肉瘤，最常发生在四肢的肌腱和腱膜附近，多见于青少年和年轻成人。它在显微镜下与黑色素瘤有相似之处（常表达 S100、SOX10、HMB-45、Melan-A），因此曾被称为"软组织黑色素瘤"，但它是一种病因完全不同的独立疾病。</p>
+    </div>
+    <div class="card">
+      <h3><span lang="en">Gastrointestinal neuroectodermal tumour (GNET)</span><span lang="zh-CN">胃肠道神经外胚层肿瘤（GNET）</span></h3>
+      <p lang="en">Formerly called "clear cell sarcoma-like tumour of the gastrointestinal tract" (CCSLGT). It grows in the wall of the stomach or intestine and carries the same EWSR1 fusions as CCS. It is S100 and SOX10 positive but, unlike CCS, usually lacks melanocytic markers such as HMB-45 and Melan-A.</p>
+      <p lang="zh-CN">过去称为"胃肠道透明细胞肉瘤样肿瘤"（CCSLGT）。它发生在胃或肠壁内，携带与透明细胞肉瘤相同的 EWSR1 融合基因。免疫组化 S100、SOX10 阳性，但与 CCS 不同，通常不表达 HMB-45、Melan-A 等黑色素细胞标志物。</p>
+    </div>
+  </div>
+  <div class="facts">
+    <div class="fact"><small><span lang="en">Genetic driver</span><span lang="zh-CN">驱动基因</span></small><div>EWSR1::ATF1 · EWSR1::CREB1</div></div>
+    <div class="fact"><small><span lang="en">How it's confirmed</span><span lang="zh-CN">如何确诊</span></small><div><span lang="en">FISH or sequencing showing the EWSR1 fusion</span><span lang="zh-CN">FISH 或基因测序检出 EWSR1 融合</span></div></div>
+    <div class="fact"><small><span lang="en">Why trials matter</span><span lang="zh-CN">为何关注临床试验</span></small><div><span lang="en">Standard sarcoma chemotherapy has shown limited benefit in advanced disease</span><span lang="zh-CN">晚期患者对常规肉瘤化疗获益有限</span></div></div>
+  </div>
+  <p class="note"><span lang="en">Because both tumours share the same driver, research on one is often relevant to the other, and some trials accept "EWSR1-rearranged" tumours. Every trial sets its own eligibility rules, so always check with the study team.</span><span lang="zh-CN">由于两者驱动基因相同，一种疾病的研究常对另一种也有参考价值，部分试验接受"EWSR1 重排"肿瘤入组。但每个试验的入组条件不同，请务必与研究团队确认。</span></p>
+</div>
+</section>
+
+<section id="evidence">
+<div class="wrap">
+  <h2><span lang="en">Key evidence so far</span><span lang="zh-CN">目前的关键研究证据</span></h2>
+  <p class="sub"><span lang="en">Hand-picked studies, summarised from the linked sources. These are small studies of a rare disease, so treat the numbers as signals, not predictions for any one person.</span><span lang="zh-CN">以下研究经人工挑选，数据摘自所附原始来源。由于这是罕见病，研究样本都很小，数字只代表研究信号，不能用来预测任何个人的情况。</span></p>
+  <div class="grid2">
+    <article class="card ev">
+      <div class="kicker"><span class="pill green"><span lang="en">Phase II trial · 2026</span><span lang="zh-CN">II 期试验 · 2026</span></span><span class="pill">NCT03277924</span></div>
+      <h3><span lang="en">IMMUNOSARC II: sunitinib + nivolumab</span><span lang="zh-CN">IMMUNOSARC II：舒尼替尼 + 纳武利尤单抗</span></h3>
+      <p lang="en">The largest prospective trial run specifically in clear cell sarcoma. It combines an anti-angiogenic drug (sunitinib) with a PD-1 immunotherapy (nivolumab).</p>
+      <p lang="zh-CN">迄今专门针对透明细胞肉瘤开展的最大规模前瞻性临床试验，联合抗血管生成药物（舒尼替尼）与 PD-1 免疫治疗（纳武利尤单抗）。</p>
+      <div class="nums">
+        <div class="num"><b>50.1%</b><span><span lang="en">free of progression at 6 months</span><span lang="zh-CN">6 个月无进展生存率</span></span></div>
+        <div class="num"><b>17 / 21</b><span><span lang="en">disease controlled (3 shrank, 14 stable)</span><span lang="zh-CN">病情得到控制（3 例缩小，14 例稳定）</span></span></div>
+        <div class="num"><b>6.2 <span lang="en">mo</span><span lang="zh-CN">个月</span></b><span><span lang="en">median progression-free survival</span><span lang="zh-CN">中位无进展生存期</span></span></div>
+        <div class="num"><b>17.0 <span lang="en">mo</span><span lang="zh-CN">个月</span></b><span><span lang="en">median overall survival</span><span lang="zh-CN">中位总生存期</span></span></div>
+      </div>
+      <p lang="en">Some responses were long-lasting. In an exploratory analysis, higher PD-1 expression was linked to longer progression-free survival.</p>
+      <p lang="zh-CN">部分患者的缓解持续时间较长。探索性分析发现，PD-1 表达较高的患者无进展生存期更长。</p>
+      <p class="src"><span lang="en">Source</span><span lang="zh-CN">来源</span>: Martin-Broto J, et al. <i>Cancer Commun</i> 2026 · <a href="https://pubmed.ncbi.nlm.nih.gov/41836677/">PMID 41836677</a> · <a href="https://clinicaltrials.gov/study/NCT03277924">NCT03277924</a></p>
+    </article>
+    <article class="card ev">
+      <div class="kicker"><span class="pill blue"><span lang="en">Retrospective study · 2022</span><span lang="zh-CN">回顾性研究 · 2022</span></span></div>
+      <h3><span lang="en">World Sarcoma Network: how standard treatments performed</span><span lang="zh-CN">世界肉瘤网络：常规治疗的实际效果</span></h3>
+      <p lang="en">55 patients with molecularly confirmed CCS from 10 centres. Standard soft-tissue sarcoma treatments gave limited benefit. The best response rate was seen with sunitinib (3 of 10 patients).</p>
+      <p lang="zh-CN">来自 10 个中心、经分子检测确诊的 55 例透明细胞肉瘤患者。常规软组织肉瘤治疗获益有限，舒尼替尼的客观缓解率最高（10 例中 3 例）。</p>
+      <div class="nums">
+        <div class="num"><b>30%</b><span><span lang="en">response with sunitinib (3/10)</span><span lang="zh-CN">舒尼替尼缓解率（3/10）</span></span></div>
+        <div class="num"><b>15 <span lang="en">mo</span><span lang="zh-CN">个月</span></b><span><span lang="en">median overall survival, advanced disease</span><span lang="zh-CN">晚期患者中位总生存期</span></span></div>
+      </div>
+      <p lang="en">The authors concluded that access to clinical trials remains key for this disease.</p>
+      <p lang="zh-CN">作者结论：对这种疾病而言，参加临床试验的机会至关重要。</p>
+      <p class="src"><span lang="en">Source</span><span lang="zh-CN">来源</span>: <i>ESMO Open</i> 2022 · <a href="https://pubmed.ncbi.nlm.nih.gov/35717681/">PMID 35717681</a></p>
+    </article>
+    <article class="card ev">
+      <div class="kicker"><span class="pill amber"><span lang="en">Phase II trial · did not meet goal</span><span lang="zh-CN">II 期试验 · 未达主要终点</span></span></div>
+      <h3><span lang="en">EORTC 90101 "CREATE": crizotinib (MET inhibitor)</span><span lang="zh-CN">EORTC 90101 "CREATE"：克唑替尼（MET 抑制剂）</span></h3>
+      <p lang="en">Because the EWSR1 fusion can switch on the MET gene, this trial tested the MET inhibitor crizotinib. Only 1 partial response was seen among 26 evaluable patients. A follow-up lab study found MET was rarely truly activated in these tumours, which may explain why.</p>
+      <p lang="zh-CN">由于 EWSR1 融合可能激活 MET 基因，该试验评估了 MET 抑制剂克唑替尼。26 例可评估患者中仅 1 例部分缓解。后续研究发现这类肿瘤中 MET 真正被激活的情况很少，这可能解释了疗效有限的原因。</p>
+      <p class="src"><span lang="en">Source</span><span lang="zh-CN">来源</span>: <i>Cancers</i> 2021 · <a href="https://pubmed.ncbi.nlm.nih.gov/34885165/">PMID 34885165</a></p>
+    </article>
+    <article class="card ev">
+      <div class="kicker"><span class="pill green"><span lang="en">Phase II trial</span><span lang="zh-CN">II 期试验</span></span></div>
+      <h3><span lang="en">Atezolizumab (anti-PD-L1) in chondrosarcoma and CCS</span><span lang="zh-CN">阿替利珠单抗（抗 PD-L1）治疗软骨肉瘤和透明细胞肉瘤</span></h3>
+      <p lang="en">A US phase II immunotherapy study. Eligibility includes a documented EWSR1::ATF1 or EWSR1::CREB1 fusion or confirmed clear cell sarcoma. Check the study page for its current status.</p>
+      <p lang="zh-CN">美国的一项 II 期免疫治疗研究，入组条件包括检出 EWSR1::ATF1 或 EWSR1::CREB1 融合，或确诊透明细胞肉瘤。当前招募状态请查看研究页面。</p>
+      <p class="src"><span lang="en">Source</span><span lang="zh-CN">来源</span>: <a href="https://www.dana-farber.org/clinical-trials/21-022">Dana-Farber Cancer Institute, study 21-022</a></p>
+    </article>
+    <article class="card ev">
+      <div class="kicker"><span class="pill"><span lang="en">Laboratory research</span><span lang="zh-CN">实验室研究</span></span></div>
+      <h3><span lang="en">Targeting the fusion itself</span><span lang="zh-CN">直接针对融合基因</span></h3>
+      <p lang="en">Early lab studies are looking for ways to switch off EWSR1::ATF1 directly. In cell and animal models, the HDAC inhibitor vorinostat lowered EWSR1::ATF1 levels, with BRD4 involved. Another study (a preprint, not yet peer reviewed) flagged PRMT5 as a possible weak point. These have <b>not</b> been shown to work in patients.</p>
+      <p lang="zh-CN">早期实验室研究正在寻找直接"关闭" EWSR1::ATF1 的方法。在细胞和动物模型中，HDAC 抑制剂伏立诺他可降低 EWSR1::ATF1 水平，机制与 BRD4 有关。另一项研究（预印本，尚未经同行评审）提示 PRMT5 可能是潜在弱点。这些方法<b>尚未</b>在患者中证实有效。</p>
+      <p class="src"><span lang="en">Sources</span><span lang="zh-CN">来源</span>: <i>Cancer Res Commun</i> 2023 · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10317042/">PMC10317042</a> · <a href="https://www.biorxiv.org/content/10.1101/2022.03.23.485409">bioRxiv 2022 (preprint)</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10147623/">PMC10147623</a></p>
+    </article>
+  </div>
+  <p class="note"><span lang="en">Evidence summary last reviewed by hand on 20 September 2026. The live sections below update automatically.</span><span lang="zh-CN">以上证据摘要于 2026 年 9 月 20 日人工整理。下方的试验和文献部分每日自动更新。</span></p>
+</div>
+</section>
+
+<section id="trials">
+<div class="wrap">
+  <h2><span lang="en">Open clinical trials</span><span lang="zh-CN">正在招募的临床试验</span></h2>
+  <p class="sub"><span lang="en">Trials listed as recruiting or not yet recruiting on ClinicalTrials.gov. Trials with a site in China are marked. Titles are shown exactly as registered, in English.</span><span lang="zh-CN">ClinicalTrials.gov 上状态为"招募中"或"尚未招募"的试验，在中国设有研究中心的已标注。试验标题保留英文原文，以免翻译失真。</span></p>
+  <div class="tabs" role="tablist" id="trialTabs"></div>
+  <div class="list" id="trialList"></div>
+  <details id="closedWrap" hidden><summary id="closedSummary"></summary><div class="list" id="closedList" style="margin-top:10px"></div></details>
+  <p class="note"><span lang="en">Chinese trials are not always on ClinicalTrials.gov. Also search China's official registry,</span><span lang="zh-CN">国内试验不一定登记在 ClinicalTrials.gov，请同时检索国家药监局</span> <a href="http://www.chinadrugtrials.org.cn">药物临床试验登记与信息公示平台</a><span lang="en"> (search 肉瘤 or 透明细胞肉瘤).</span><span lang="zh-CN">（检索"肉瘤""透明细胞肉瘤"）。</span></p>
+</div>
+</section>
+
+<section id="papers">
+<div class="wrap">
+  <h2><span lang="en">Latest research</span><span lang="zh-CN">最新文献</span></h2>
+  <p class="sub"><span lang="en">Papers from PubMed on CCS, GNET and EWSR1::ATF1 / EWSR1::CREB1 (childhood "clear cell sarcoma of the kidney", a different disease, is excluded). Titles are shown exactly as published.</span><span lang="zh-CN">来自 PubMed 的透明细胞肉瘤、GNET 及 EWSR1::ATF1 / EWSR1::CREB1 相关论文（已排除另一种疾病"儿童肾透明细胞肉瘤"）。论文标题保留英文原文。</span></p>
+  <div class="tools">
+    <div class="chips" id="paperChips"></div>
+    <input type="search" id="paperSearch" aria-label="Search papers">
+  </div>
+  <div class="list" id="paperList"></div>
+  <button class="more" id="paperMore" type="button" hidden></button>
+</div>
+</section>
+
+<section id="guide">
+<div class="wrap">
+  <h2><span lang="en">For patients and families</span><span lang="zh-CN">写给患者和家属</span></h2>
+  <p class="sub"><span lang="en">General information to help conversations with the care team. It is not medical advice.</span><span lang="zh-CN">以下为一般性信息，帮助您与医疗团队更好地沟通，不构成医疗建议。</span></p>
+  <div class="grid2">
+    <div class="card">
+      <h3><span lang="en">Reading a scan report (RECIST 1.1)</span><span lang="zh-CN">如何看懂疗效评估（RECIST 1.1 标准）</span></h3>
+      <table class="recist">
+        <tr><th><span lang="en">Result</span><span lang="zh-CN">结果</span></th><th><span lang="en">Meaning (sum of target tumour diameters)</span><span lang="zh-CN">含义（靶病灶直径之和）</span></th></tr>
+        <tr><td><span class="pill green"><span lang="en">Partial response</span><span lang="zh-CN">部分缓解 PR</span></span></td><td><span lang="en">Shrinks by 30% or more</span><span lang="zh-CN">缩小 ≥30%</span></td></tr>
+        <tr><td><span class="pill blue"><span lang="en">Stable disease</span><span lang="zh-CN">疾病稳定 SD</span></span></td><td><span lang="en">Between the two</span><span lang="zh-CN">介于两者之间</span></td></tr>
+        <tr><td><span class="pill red"><span lang="en">Progression</span><span lang="zh-CN">疾病进展 PD</span></span></td><td><span lang="en">Grows by 20% or more (and at least 5 mm), or new lesions appear</span><span lang="zh-CN">增大 ≥20%（且绝对值 ≥5 mm），或出现新病灶</span></td></tr>
+      </table>
+      <p class="note" style="margin-top:10px"><span lang="en">For a tumour that grows when untreated, "stable disease" can be a meaningful result: it means treatment is holding it back.</span><span lang="zh-CN">对于不治疗就会持续生长的肿瘤，"疾病稳定"本身就可能是有意义的结果，说明治疗把它控制住了。</span></p>
+    </div>
+    <div class="card">
+      <h3><span lang="en">Questions to ask the care team</span><span lang="zh-CN">可以向医疗团队提的问题</span></h3>
+      <ol class="q" lang="en">
+        <li>Has the EWSR1 fusion, and its partner gene, been confirmed?</li>
+        <li>Has the case been discussed at a sarcoma multidisciplinary team (MDT) meeting?</li>
+        <li>Which clinical trials could fit, including in other cities or countries?</li>
+        <li>If the disease is limited to a few spots, is local treatment (surgery, ablation or stereotactic radiotherapy / SBRT) an option?</li>
+        <li>How will we know if treatment is working, and when is the next scan?</li>
+      </ol>
+      <ol class="q" lang="zh-CN">
+        <li>EWSR1 融合基因及其伙伴基因是否已经确认？</li>
+        <li>病例是否经过肉瘤多学科会诊（MDT）讨论？</li>
+        <li>有哪些临床试验可能适合，包括其他城市或国家的试验？</li>
+        <li>如果病灶数量有限，是否可以考虑局部治疗（手术、消融或立体定向放疗 SBRT）？</li>
+        <li>如何判断治疗是否有效？下一次复查是什么时候？</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3><span lang="en">Finding trials yourself</span><span lang="zh-CN">自己查找临床试验</span></h3>
+      <p lang="en"><a href="https://clinicaltrials.gov/search?cond=clear%20cell%20sarcoma&amp;aggFilters=status:rec%20not">ClinicalTrials.gov</a> is the largest international registry. In China, use the official <a href="http://www.chinadrugtrials.org.cn">drug trial registry</a>. Sarcoma centres also run studies that may not appear online yet, so it is worth asking them directly.</p>
+      <p lang="zh-CN"><a href="https://clinicaltrials.gov/search?cond=clear%20cell%20sarcoma&amp;aggFilters=status:rec%20not">ClinicalTrials.gov</a> 是全球最大的试验登记平台。国内请使用官方的<a href="http://www.chinadrugtrials.org.cn">药物临床试验登记与信息公示平台</a>。各肉瘤诊疗中心也可能有尚未在网上公布的研究，值得直接咨询。</p>
+    </div>
+    <div class="card">
+      <h3><span lang="en">Checking what you read</span><span lang="zh-CN">如何核实看到的信息</span></h3>
+      <p lang="en">Trustworthy claims can be traced to a PubMed ID (PMID) or trial number (NCT…). Be cautious with treatments sold online that promise results, and bring anything you find to the treating team before acting on it.</p>
+      <p lang="zh-CN">可靠的信息能追溯到 PubMed 编号（PMID）或试验编号（NCT…）。对网上宣称有效的疗法要保持警惕，任何发现都请先与主治团队讨论再做决定。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="about">
+<div class="wrap">
+  <h2><span lang="en">About this site</span><span lang="zh-CN">关于本站</span></h2>
+  <div class="grid2">
+    <div class="card">
+      <h3><span lang="en">How it works</span><span lang="zh-CN">运作方式</span></h3>
+      <p lang="en">An automatic script runs every morning (about 08:00 Hong Kong time). It queries the official PubMed and ClinicalTrials.gov databases and copies titles, dates and statuses exactly as published, each with its PMID or NCT number and a link. <b>No AI writes or summarises the live sections</b>, so nothing there can be invented. If a database cannot be reached, the site says so and keeps the last good data.</p>
+      <p lang="zh-CN">每天早上（香港时间约 8:00）自动运行一次程序，检索官方的 PubMed 和 ClinicalTrials.gov 数据库，原样复制标题、日期和状态，每条都附有 PMID 或 NCT 编号及链接。<b>试验和文献部分不经过任何 AI 撰写或总结</b>，因此不会凭空捏造内容。如果某个数据库无法访问，页面会显示提示，并保留上一次的有效数据。</p>
+    </div>
+    <div class="card">
+      <h3><span lang="en">Not covered automatically</span><span lang="zh-CN">未自动覆盖的内容</span></h3>
+      <p lang="en">China's drug trial registry (it has no public data feed) and conference abstracts (ASCO in June, ESMO in September–October, CTOS in November) are not tracked automatically. Check them by hand.</p>
+      <p lang="zh-CN">国家药监局的临床试验登记平台（没有公开数据接口）以及学术会议摘要（6 月 ASCO、9–10 月 ESMO、11 月 CTOS）暂不自动追踪，请手动查阅。</p>
+    </div>
+  </div>
+  <div class="disclaimer" style="margin-top:14px">
+    <p lang="en" style="margin:0"><b>Not medical advice.</b> This site is for information only and does not replace a doctor. It contains no personal patient information. Every treatment decision should be made with the treating medical team.</p>
+    <p lang="zh-CN" style="margin:0"><b>不构成医疗建议。</b>本站仅供信息参考，不能替代医生诊疗，也不包含任何患者个人信息。所有治疗决定都应与主治医疗团队共同做出。</p>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span lang="en">Data: PubMed (U.S. National Library of Medicine) and ClinicalTrials.gov. Source code:</span><span lang="zh-CN">数据来源：PubMed（美国国家医学图书馆）与 ClinicalTrials.gov。源代码：</span>
+    <a id="repoLink" href="https://github.com/">GitHub</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var T = {
+    en: {
+      updated:"Last updated", openCcs:"open CCS / GNET trials", papers:"papers tracked", newPapers:"new papers in last 30 days",
+      waiting:"Waiting for the first update. Data appears after the first run.", loadFail:"Could not load the latest data. Please refresh later.",
+      srcFail:"could not be reached on", showing:"showing the last good data.",
+      g_ccs:"CCS / GNET", g_ewsr1:"EWSR1 (includes Ewing sarcoma)", g_sts_china:"Soft-tissue sarcoma · China sites",
+      noTrials:"No open trials in this group right now.", closed:"No longer listed as recruiting",
+      RECRUITING:"Recruiting", NOT_YET_RECRUITING:"Not yet recruiting", phase:"Phase", china:"Site in China", isNew:"New",
+      posted:"First posted", sponsor:"Sponsor", sites:"Sites", noSites:"sites not listed", closedOn:"noticed",
+      all:"All", trialRep:"Trial reports", recent:"New (30 days)", search:"Search titles…", more:"Show more",
+      noPapers:"No papers match.", added:"added"
+    },
+    zh: {
+      updated:"最近更新", openCcs:"个 CCS / GNET 试验招募中", papers:"篇论文已收录", newPapers:"篇近 30 天新增论文",
+      waiting:"等待首次更新，首次运行后将显示数据。", loadFail:"暂时无法加载最新数据，请稍后刷新。",
+      srcFail:"无法访问，时间：", showing:"当前显示上一次的有效数据。",
+      g_ccs:"透明细胞肉瘤 / GNET", g_ewsr1:"EWSR1 相关（含尤文肉瘤）", g_sts_china:"软组织肉瘤 · 中国中心",
+      noTrials:"该类别暂无招募中的试验。", closed:"已不在招募列表中",
+      RECRUITING:"招募中", NOT_YET_RECRUITING:"尚未招募", phase:"期", china:"中国有研究中心", isNew:"新",
+      posted:"首次登记", sponsor:"申办方", sites:"研究中心", noSites:"未列出中心", closedOn:"发现于",
+      all:"全部", trialRep:"临床试验报告", recent:"近 30 天新增", search:"搜索标题…", more:"显示更多",
+      noPapers:"没有符合条件的论文。", added:"收录于"
+    }
+  };
+  var COUNTRY_ZH = {"China":"中国","United States":"美国","Japan":"日本","Korea, Republic of":"韩国","Spain":"西班牙","Italy":"意大利","France":"法国","Germany":"德国","United Kingdom":"英国","Canada":"加拿大","Australia":"澳大利亚","Taiwan":"中国台湾","Hong Kong":"中国香港","Netherlands":"荷兰","Belgium":"比利时","Switzerland":"瑞士","Singapore":"新加坡","India":"印度","Israel":"以色列","Poland":"波兰","Denmark":"丹麦","Sweden":"瑞典","Norway":"挪威","Austria":"奥地利"};
+  var lang = "en", feed = null, trialTab = "ccs", paperFilter = "all", paperQuery = "", paperShown = 25;
+
+  function t(k){ return (T[lang] && T[lang][k]) || T.en[k] || k; }
+  function el(tag, attrs){
+    var n = document.createElement(tag), i;
+    if (attrs) for (var a in attrs) {
+      if (a === "text") n.textContent = attrs[a];
+      else if (a === "cls") n.className = attrs[a];
+      else n.setAttribute(a, attrs[a]);
+    }
+    for (i = 2; i < arguments.length; i++) {
+      var c = arguments[i];
+      if (c == null || c === false) continue;
+      n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    }
+    return n;
+  }
+  function clear(n){ while (n.firstChild) n.removeChild(n.firstChild); }
+  function fmtDate(s){
+    if (!s) return "";
+    var d = new Date(s.length <= 10 ? s + "T00:00:00" : s);
+    if (isNaN(d)) return s;
+    return lang === "zh"
+      ? d.toLocaleDateString("zh-CN", {year:"numeric", month:"long", day:"numeric"})
+      : d.toLocaleDateString("en-GB", {year:"numeric", month:"short", day:"numeric"});
+  }
+  function daysAgo(s){ return s ? (Date.now() - new Date(s + "T00:00:00Z").getTime()) / 864e5 : 1e9; }
+  function isNew(item){ return feed && item.first_seen > feed.baseline_date && daysAgo(item.first_seen) <= 30; }
+  function phaseText(p){
+    if (!p || !p.length) return "";
+    var s = p.map(function(x){ return x.replace("EARLY_PHASE1","0").replace("PHASE","").replace("NA","–"); }).join("/");
+    return lang === "zh" ? s + t("phase") : t("phase") + " " + s;
+  }
+  function country(c){ return lang === "zh" ? (COUNTRY_ZH[c] || c) : c; }
+
+  function setLang(l){
+    lang = l === "zh" ? "zh" : "en";
+    document.documentElement.setAttribute("data-lang", lang);
+    document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+    document.querySelectorAll("[data-set-lang]").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-set-lang") === lang));
+    });
+    try { localStorage.setItem("ccs-lang", lang); } catch (e) {}
+    document.getElementById("paperSearch").placeholder = t("search");
+    renderAll();
+  }
+
+  function renderStats(){
+    var box = document.getElementById("stats"); clear(box);
+    var warn = document.getElementById("warn");
+    if (!feed) { box.appendChild(el("div", {cls:"stat"}, el("span", {text:t("waiting")}))); warn.hidden = true; return; }
+    var trials = Object.values(feed.trials || {}), papers = Object.values(feed.papers || {});
+    var openCcs = trials.filter(function(x){ return x.open && x.group === "ccs"; }).length;
+    var newP = papers.filter(isNew).length;
+    function stat(big, small){ return el("div", {cls:"stat"}, el("b", {text:String(big)}), el("span", {text:small})); }
+    box.appendChild(stat(fmtDate(feed.updated), t("updated")));
+    box.appendChild(stat(openCcs, t("openCcs")));
+    box.appendChild(stat(papers.length, t("papers")));
+    box.appendChild(stat(newP, t("newPapers")));
+    var bad = Object.keys(feed.sources || {}).filter(function(k){ return feed.sources[k] && feed.sources[k].ok === false; });
+    if (bad.length) {
+      warn.textContent = "⚠ " + bad.map(function(k){
+        return (k === "pubmed" ? "PubMed" : "ClinicalTrials.gov") + " " + t("srcFail") + " " + fmtDate(feed.sources[k].failed_at);
+      }).join("; ") + " · " + t("showing");
+      warn.hidden = false;
+    } else warn.hidden = true;
+  }
+
+  function trialCard(id, x){
+    var kick = el("div", {cls:"ev kicker", style:"margin:0"});
+    kick.appendChild(el("span", {cls:"pill " + (x.open ? "green" : ""), text: x.open ? t(x.status) : t("closed")}));
+    if (x.phases && x.phases.length) kick.appendChild(el("span", {cls:"pill", text:phaseText(x.phases)}));
+    if (x.china) kick.appendChild(el("span", {cls:"pill red", text:"🇨🇳 " + t("china")}));
+    if (isNew(x)) kick.appendChild(el("span", {cls:"pill amber", text:t("isNew")}));
+    var sites = (x.countries || []).map(country);
+    var meta = [id, t("posted") + " " + fmtDate(x.first_posted)];
+    if (x.sponsor) meta.push(t("sponsor") + ": " + x.sponsor);
+    meta.push(t("sites") + ": " + (sites.length ? sites.slice(0, 8).join(", ") + (sites.length > 8 ? " +" + (sites.length - 8) : "") : t("noSites")));
+    if (!x.open && x.closed_seen) meta.push(t("closedOn") + " " + fmtDate(x.closed_seen));
+    return el("article", {cls:"item"}, kick,
+      el("div", {cls:"t"}, el("a", {href:x.url, text:x.title, target:"_blank", rel:"noopener"})),
+      el("div", {cls:"m", text: meta.join(" · ")}),
+      x.conditions && x.conditions.length ? el("div", {cls:"m", text: x.conditions.join(" · ")}) : null);
+  }
+
+  function renderTrials(){
+    var tabs = document.getElementById("trialTabs"), list = document.getElementById("trialList");
+    clear(tabs); clear(list);
+    var all = feed ? feed.trials || {} : {};
+    ["ccs","ewsr1","sts_china"].forEach(function(g){
+      var n = Object.values(all).filter(function(x){ return x.open && x.group === g; }).length;
+      var b = el("button", {type:"button", role:"tab", "aria-selected": String(trialTab === g)}, t("g_" + g), el("span", {cls:"n", text:"(" + n + ")"}));
+      b.addEventListener("click", function(){ trialTab = g; renderTrials(); });
+      tabs.appendChild(b);
+    });
+    if (!feed) { list.appendChild(el("div", {cls:"empty", text:t("waiting")})); return; }
+    var ids = Object.keys(all).filter(function(k){ return all[k].open && all[k].group === trialTab; });
+    ids.sort(function(a, b){
+      var A = all[a], B = all[b];
+      return (B.china - A.china) || String(B.first_posted).localeCompare(String(A.first_posted));
+    });
+    if (!ids.length) list.appendChild(el("div", {cls:"empty", text:t("noTrials")}));
+    ids.forEach(function(k){ list.appendChild(trialCard(k, all[k])); });
+
+    var closedIds = Object.keys(all).filter(function(k){ return !all[k].open && all[k].group === trialTab; });
+    var wrap = document.getElementById("closedWrap"), cl = document.getElementById("closedList");
+    clear(cl);
+    wrap.hidden = !closedIds.length;
+    document.getElementById("closedSummary").textContent = t("closed") + " (" + closedIds.length + ")";
+    closedIds.sort(function(a, b){ return String(all[b].closed_seen).localeCompare(String(all[a].closed_seen)); })
+      .forEach(function(k){ cl.appendChild(trialCard(k, all[k])); });
+  }
+
+  function renderPapers(){
+    var chips = document.getElementById("paperChips"), list = document.getElementById("paperList"), more = document.getElementById("paperMore");
+    clear(chips); clear(list);
+    [["all","all"],["trial","trialRep"],["new","recent"]].forEach(function(c){
+      var b = el("button", {type:"button", "aria-pressed": String(paperFilter === c[0]), text:t(c[1])});
+      b.addEventListener("click", function(){ paperFilter = c[0]; paperShown = 25; renderPapers(); });
+      chips.appendChild(b);
+    });
+    if (!feed) { list.appendChild(el("div", {cls:"empty", text:t("waiting")})); more.hidden = true; return; }
+    var all = feed.papers || {}, q = paperQuery.trim().toLowerCase();
+    var ids = Object.keys(all).filter(function(k){
+      var p = all[k];
+      if (paperFilter === "trial" && !p.is_trial) return false;
+      if (paperFilter === "new" && !isNew(p)) return false;
+      if (q && (p.title + " " + p.journal).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    });
+    ids.sort(function(a, b){ return String(all[b].pubdate).localeCompare(String(all[a].pubdate)) || Number(b) - Number(a); });
+    if (!ids.length) list.appendChild(el("div", {cls:"empty", text:t("noPapers")}));
+    ids.slice(0, paperShown).forEach(function(k){
+      var p = all[k], kick = el("div", {cls:"ev kicker", style:"margin:0"});
+      if (p.is_trial) kick.appendChild(el("span", {cls:"pill green", text:t("trialRep")}));
+      if (isNew(p)) kick.appendChild(el("span", {cls:"pill amber", text:t("isNew")}));
+      list.appendChild(el("article", {cls:"item"}, kick.childNodes.length ? kick : null,
+        el("div", {cls:"t"}, el("a", {href:p.url, text:p.title, target:"_blank", rel:"noopener"})),
+        el("div", {cls:"m", text:[p.journal, fmtDate(p.pubdate), "PMID " + k].filter(Boolean).join(" · ")})));
+    });
+    more.hidden = ids.length <= paperShown;
+    more.textContent = t("more") + " (" + (ids.length - paperShown) + ")";
+  }
+
+  function renderAll(){ renderStats(); renderTrials(); renderPapers(); }
+
+  document.querySelectorAll("[data-set-lang]").forEach(function(b){
+    b.addEventListener("click", function(){ setLang(b.getAttribute("data-set-lang")); });
+  });
+  document.getElementById("paperSearch").addEventListener("input", function(e){ paperQuery = e.target.value; paperShown = 25; renderPapers(); });
+  document.getElementById("paperMore").addEventListener("click", function(){ paperShown += 25; renderPapers(); });
+
+  var m = location.hostname.match(/^([^.]+)\.github\.io$/);
+  if (m) document.getElementById("repoLink").href = "https://github.com/" + m[1] + "/" + (location.pathname.split("/")[1] || "");
+
+  var saved = null;
+  try { saved = localStorage.getItem("ccs-lang"); } catch (e) {}
+  var qs = new URLSearchParams(location.search).get("lang");
+  setLang(qs || saved || ((navigator.language || "").toLowerCase().indexOf("zh") === 0 ? "zh" : "en"));
+
+  fetch("data/feed.json", {cache:"no-store"}).then(function(r){
+    if (!r.ok) throw new Error(r.status);
+    return r.json();
+  }).then(function(j){ feed = j; renderAll(); }).catch(function(){
+    feed = null; renderAll();
+    var w = document.getElementById("warn");
+    if (location.protocol !== "file:") { w.textContent = t("loadFail"); w.hidden = false; }
+  });
+})();
+</script>
+</body>
+</html>
